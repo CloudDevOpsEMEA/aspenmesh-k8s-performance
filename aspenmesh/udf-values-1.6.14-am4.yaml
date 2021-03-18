@@ -82,6 +82,6 @@ jaeger:
       nameOverride: aspen-mesh-cassandra
 pilot:
   nodeSelector:
-    node: aspenmesh
+    role: aspenmesh
 prometheus: 
   enabled: true

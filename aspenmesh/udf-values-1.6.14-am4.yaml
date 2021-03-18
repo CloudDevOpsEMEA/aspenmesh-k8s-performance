@@ -1,4 +1,4 @@
-aspen-mesh-cert-manager:
+cert-manager:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

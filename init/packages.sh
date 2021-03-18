@@ -11,7 +11,10 @@ echo "Install helm"
 sudo snap install helm --classic
 
 echo "Install k9s"
-sudo snap install k9s
+cd /tmp
+wget https://github.com/derailed/k9s/releases/download/v0.24.2/k9s_Linux_x86_64.tar.gz
+tar xvfz k9s_Linux_x86_64.tar.gz
+sudo cp k9s /usr/local/bin
 mkdir /home/ubuntu/.k9s
 
 echo "Install docker"

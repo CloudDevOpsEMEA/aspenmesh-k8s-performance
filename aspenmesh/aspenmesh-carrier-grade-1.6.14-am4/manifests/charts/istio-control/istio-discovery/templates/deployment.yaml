@@ -191,10 +191,10 @@ spec:
           - name: extracacerts
             mountPath: /cacerts
           {{- end }}
-    {{- with .Values.nodeSelector }}
+    {{- with .Values.pilot.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
       # Technically not needed on this pod - but it helps debugging/testing SDS
       # Should be removed after everything works.

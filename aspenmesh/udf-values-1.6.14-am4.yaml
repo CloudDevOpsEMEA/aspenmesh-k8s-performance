@@ -1,6 +1,6 @@
 aspen-mesh-controlplane:
   # The name of the cluster where Aspen Mesh is being installed.
-  clusterId: F5GCore
+  clusterId: Asperformance
 
   userAuth:
     # type can be set to `jwt` or `none`. JWT authentication is highly recommended.

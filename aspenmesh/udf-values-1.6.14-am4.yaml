@@ -46,7 +46,7 @@ gateways:
 global:
   certificateCustomFields: true
   defaultNodeSelector:
-    node: aspenmesh
+    role: aspenmesh
   proxy:
     accessLogEncoding: TEXT
     accessLogFile: /dev/stdout

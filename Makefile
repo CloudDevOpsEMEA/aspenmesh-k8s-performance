@@ -21,6 +21,18 @@ install-k8s: ## Install k8s using kubespray
 	ansible-playbook -i inventory/aspenmesh/hosts.yaml  --become --become-user=root cluster.yml
 
 
+label-k8s-nodes: ## Assign labels to k8s nodes for aspenmesh and application
+	kubectl label nodes aspen1 role=aspenmesh
+	kubectl label nodes aspen2 role=aspenmesh
+	kubectl label nodes aspen3 role=aspenmesh
+	kubectl label nodes aspen4 role=aspenmesh
+	kubectl label nodes worker1 role=application
+	kubectl label nodes worker2 role=application
+	kubectl label nodes worker3 role=application
+	kubectl label nodes worker4 role=application
+	kubectl label nodes worker5 role=application
+
+
 reboot-k8s: ## Reboot k8s cluster hosts
 	ssh master sudo reboot || true
 	ssh aspen1 sudo reboot || true

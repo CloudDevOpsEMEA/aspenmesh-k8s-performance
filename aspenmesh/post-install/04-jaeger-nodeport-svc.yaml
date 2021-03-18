@@ -10,7 +10,7 @@ metadata:
   namespace: istio-system
 spec:
   ports:
-  - name: query
+  - name: http
     port: 80
     protocol: TCP
     targetPort: tcp-query

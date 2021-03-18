@@ -23,40 +23,40 @@ install-k8s: ## Install k8s using kubespray
 
 reboot-k8s: ## Reboot k8s cluster hosts
 	ssh master sudo reboot || true
-	ssh node1 sudo reboot || true
-	ssh node2 sudo reboot || true
-	ssh node3 sudo reboot || true
-	ssh node4 sudo reboot || true
-	ssh node5 sudo reboot || true
-	ssh node6 sudo reboot || true
-	ssh node7 sudo reboot || true
-	ssh node8 sudo reboot || true
-	ssh node9 sudo reboot || true
+	ssh aspen1 sudo reboot || true
+	ssh aspen2 sudo reboot || true
+	ssh aspen3 sudo reboot || true
+	ssh aspen4 sudo reboot || true
+	ssh worker1 sudo reboot || true
+	ssh worker2 sudo reboot || true
+	ssh worker3 sudo reboot || true
+	ssh worker4 sudo reboot || true
+	ssh worker5 sudo reboot || true
 
 
 git-clone-all: ## Clone all git repos
 	ssh jumphost 		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
 	ssh master  		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node1   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node2   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node3   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node4   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node5   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node6   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node7   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node8   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
-	ssh node9   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh aspen1   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh aspen2   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh aspen3   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh aspen4   		'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh worker1   	'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh worker2   	'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh worker3   	'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh worker4   	'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
+	ssh worker5   	'cd ${HOME_DIR} ; git clone ${GIT_REPO}' || true
 
 
 git-pull-all: ## Pull all git repos
 	ssh jumphost 		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
 	ssh master  		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node1   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node2   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node3   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node4   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node5   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node6   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node7   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node8   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
-	ssh node9   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh aspen1   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh aspen2   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh aspen3   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh aspen4   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh worker1  		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh worker2  		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh worker3  		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh worker4   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true
+	ssh worker5   		'cd ${REPO_DIR}; git pull ; sudo updatedb' || true

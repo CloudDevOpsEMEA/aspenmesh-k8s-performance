@@ -14,6 +14,27 @@ aspen-mesh-controlplane:
       # (Optional) - A comma delimited list of claims used for validating JWTs. Example "aud=aspenmesh.io,role=k8s.admin". Defaults to "aud=aspenmesh.io"
       #claims: aud=aspenmesh:io,role=k8s:admin
 
+aspen-mesh-event-storage:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - aspen-mesh-event-storage
+        topologyKey: "kubernetes.io/hostname"
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role
+            operator: In
+            values:
+            - aspenmesh
+
+
 aspen-mesh-packet-inspector:
    enabled: false
    analysis:
@@ -56,11 +77,19 @@ prometheus:
   enabled: true
 
 jaeger:
-  enabled: true
-  
-cassandra:
-  enabled: true
-  fullnameOverride: aspen-mesh-cassandra
+  enabled: true  
+  cassandra:
+    enabled: true
+    fullnameOverride: aspen-mesh-cassandra
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
 
 external-dns:
   # enabled by default

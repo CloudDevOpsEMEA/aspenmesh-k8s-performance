@@ -4,39 +4,39 @@ all:
       ansible_host: 10.1.1.5
       ip: 10.1.1.5
       access_ip: 10.1.1.5
-    node1:
+    aspen1:
       ansible_host: 10.1.1.6
       ip: 10.1.1.6
       access_ip: 10.1.1.6
-    node2:
+    aspen2:
       ansible_host: 10.1.1.7
       ip: 10.1.1.7
       access_ip: 10.1.1.7
-    node3:
+    aspen3:
       ansible_host: 10.1.1.8
       ip: 10.1.1.8
       access_ip: 10.1.1.8
-    node4:
+    aspen4:
       ansible_host: 10.1.1.9
       ip: 10.1.1.9
       access_ip: 10.1.1.9
-    node5:
+    worker1:
       ansible_host: 10.1.1.10
       ip: 10.1.1.10
       access_ip: 10.1.1.10
-    node6:
+    worker2:
       ansible_host: 10.1.1.11
       ip: 10.1.1.11
       access_ip: 10.1.1.11
-    node7:
+    worker3:
       ansible_host: 10.1.1.12
       ip: 10.1.1.12
       access_ip: 10.1.1.12
-    node8:
+    worker4:
       ansible_host: 10.1.1.13
       ip: 10.1.1.13
       access_ip: 10.1.1.13
-    node9:
+    worker5:
       ansible_host: 10.1.1.14
       ip: 10.1.1.14
       access_ip: 10.1.1.14
@@ -46,15 +46,15 @@ all:
         master:
     kube-node:
       hosts:
-        node1:
-        node2:
-        node3:
-        node4:
-        node5:
-        node6:
-        node7:
-        node8:
-        node9:
+        aspen1:
+        aspen2:
+        aspen3:
+        aspen4:
+        worker1:
+        worker2:
+        worker3:
+        worker4:
+        worker4:
     etcd:
       hosts:
         master:

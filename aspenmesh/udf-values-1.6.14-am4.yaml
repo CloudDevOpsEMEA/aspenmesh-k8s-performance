@@ -35,13 +35,13 @@ aspen-mesh-secure-ingress:
   lets-encrypt-email: ""
 cert-manager: 
   nodeSelector:
-    node: aspenmesh
+    role: aspenmesh
   cainjector: 
     nodeSelector:
-      node: aspenmesh
+      role: aspenmesh
   webhook: 
     nodeSelector:
-      node: aspenmesh
+      role: aspenmesh
 citadel: 
   enabled: true
 external-dns: 
@@ -67,16 +67,16 @@ jaeger:
   cassandra: 
     selector:
       nodeSelector:
-        node: aspenmesh
+        role: aspenmesh
     enabled: true
     fullnameOverride: aspen-mesh-cassandra
   collector: 
     nodeSelector:
-      node: aspenmesh
+      role: aspenmesh
   enabled: true
   query: 
     nodeSelector:
-      node: aspenmesh
+      role: aspenmesh
   storage:
     cassandra:
       nameOverride: aspen-mesh-cassandra

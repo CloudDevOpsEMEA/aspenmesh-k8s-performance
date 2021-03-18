@@ -184,6 +184,8 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- if .Values.provisionDataStore.cassandra -}}
 {{- if .Values.storage.cassandra.nameOverride }}
 {{- printf "%s" .Values.storage.cassandra.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- else if .Values.cassandra.fullnameOverride }}
+{{- printf "%s" .Values.cassandra.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- printf "%s-%s" .Release.Name "cassandra" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

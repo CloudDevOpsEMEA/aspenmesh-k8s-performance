@@ -127,8 +127,8 @@ jaeger:
                   operator: In
                   values: 
                     - aspenmesh
-  storage:
-    cassandra:
-      nameOverride: aspen-mesh-cassandra
+  # storage:
+  #   cassandra:
+  #     nameOverride: aspen-mesh-cassandra
 prometheus: 
   enabled: true

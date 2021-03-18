@@ -116,6 +116,7 @@ jaeger:
                   operator: In
                   values: 
                     - aspenmesh
+    host: aspen-mesh-cassandra
   enabled: true
   query: 
     affinity: 
@@ -127,6 +128,7 @@ jaeger:
                   operator: In
                   values: 
                     - aspenmesh
+    host: aspen-mesh-cassandra
 pilot: 
 prometheus: 
   enabled: true

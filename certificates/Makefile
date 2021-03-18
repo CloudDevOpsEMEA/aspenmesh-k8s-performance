@@ -14,9 +14,9 @@ K8S_CLUSTER_DOMAIN ?= cluster.local
 # variables: root CA
 ROOTCA_DAYS ?= 3650
 ROOTCA_KEYSZ ?= 4096
-ROOTCA_ORG ?= F5
+ROOTCA_ORG ?= AspenMesh
 ROOTCA_ORG_UNIT ?= Presales
-ROOTCA_CN ?= aspen-demo.org
+ROOTCA_CN ?= aspen-performance.org
 # Additional variables are defined in root-ca.conf target below.
 
 #------------------------------------------------------------------------
@@ -51,7 +51,7 @@ view:
 #------------------------------------------------------------------------
 ##install-ca:		install CA on your host system
 install-ca:
-	sudo cp root-cert.pem /usr/local/share/ca-certificates/aspen-demo.org.crt
+	sudo cp root-cert.pem /usr/local/share/ca-certificates/aspen-performance.org.crt
 	sudo update-ca-certificates
 
 #------------------------------------------------------------------------

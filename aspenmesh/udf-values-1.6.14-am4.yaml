@@ -24,7 +24,7 @@ aspen-mesh-event-storage:
               operator: In
               values:
               - aspen-mesh-event-storage
-        topologyKey: "kubernetes.io/hostname"
+        topologyKey: kubernetes.io/hostname
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:

@@ -130,6 +130,5 @@ jaeger:
   storage:
     cassandra:
       nameOverride: aspen-mesh-cassandra
-pilot: 
 prometheus: 
   enabled: true

@@ -129,28 +129,28 @@ jaeger:
               operator: In
               values:
               - aspenmesh
-  ingester:
-    enabled: true
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: role
-              operator: In
-              values:
-              - aspenmesh
-  agent:
-    enabled: true
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: role
-              operator: In
-              values:
-              - aspenmesh
+  # ingester:
+  #   enabled: true
+  #   affinity:
+  #     nodeAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #         nodeSelectorTerms:
+  #         - matchExpressions:
+  #           - key: role
+  #             operator: In
+  #             values:
+  #             - aspenmesh
+  # agent:
+  #   enabled: true
+  #   affinity:
+  #     nodeAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #         nodeSelectorTerms:
+  #         - matchExpressions:
+  #           - key: role
+  #             operator: In
+  #             values:
+  #             - aspenmesh
   collector:
     affinity:
       nodeAffinity:

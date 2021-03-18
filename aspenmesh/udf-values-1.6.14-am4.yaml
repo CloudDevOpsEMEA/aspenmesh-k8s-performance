@@ -1,3 +1,34 @@
+aspen-mesh-cert-manager:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role
+            operator: In
+            values:
+            - aspenmesh
+  cainjector:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+  webhook:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+
 aspen-mesh-controlplane:
   # The name of the cluster where Aspen Mesh is being installed.
   clusterId: Asperformance
@@ -33,7 +64,6 @@ aspen-mesh-event-storage:
             operator: In
             values:
             - aspenmesh
-
 
 aspen-mesh-packet-inspector:
    enabled: false
@@ -81,6 +111,57 @@ jaeger:
   cassandra:
     enabled: true
     fullnameOverride: aspen-mesh-cassandra
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - cassandra
+          topologyKey: "kubernetes.io/hostname"    
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+  ingester:
+    enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+  agent:
+    enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+  collector:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - aspenmesh
+  query:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

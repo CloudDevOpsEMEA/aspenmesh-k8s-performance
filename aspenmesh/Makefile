@@ -29,9 +29,9 @@ install: istioctl  ## Install aspenmesh
 		--from-file=${CERT_DIR}/root-cert.pem \
 		--from-file=${CERT_DIR}/cert-chain.pem 
 	helm install istio-base ${CHART_DIR}/base --namespace ${ASPEN_NAMESPACE} ${HELM_ARGS} || true
-	sleep 10
+	echo "sleeping 10 sec" && sleep 10
 	helm install istiod ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
-	sleep 120
+	echo "sleeping 120 sec" && sleep 120
 	helm install istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm install istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm install istio-telemetry ${CHART_DIR}/istio-telemetry/grafana --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
@@ -39,9 +39,9 @@ install: istioctl  ## Install aspenmesh
 
 upgrade:  ## Upgrade aspenmesh
 	helm upgrade istio-base ${CHART_DIR}/base --namespace ${ASPEN_NAMESPACE} ${HELM_ARGS} || true
-	sleep 10
+	echo "sleeping 10 sec" && sleep 10
 	helm upgrade istiod ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
-	sleep 20
+	echo "sleeping 20 sec" && sleep 20
 	helm upgrade istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm upgrade istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm upgrade istio-telemetry ${CHART_DIR}/istio-telemetry/grafana --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true

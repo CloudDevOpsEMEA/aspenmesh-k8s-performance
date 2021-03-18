@@ -11,8 +11,7 @@ aspen-mesh-event-storage:
     nodeAffinity: 
       requiredDuringSchedulingIgnoredDuringExecution: 
         nodeSelectorTerms: 
-          - 
-            matchExpressions: 
+          - matchExpressions: 
               - 
                 key: role
                 operator: In
@@ -20,11 +19,9 @@ aspen-mesh-event-storage:
                   - aspenmesh
     podAntiAffinity: 
       requiredDuringSchedulingIgnoredDuringExecution: 
-        - 
-          labelSelector: 
+        - labelSelector: 
             matchExpressions: 
-              - 
-                key: app
+              - key: app
                 operator: In
                 values: 
                   - aspen-mesh-event-storage
@@ -42,10 +39,8 @@ cert-manager:
     nodeAffinity: 
       requiredDuringSchedulingIgnoredDuringExecution: 
         nodeSelectorTerms: 
-          - 
-            matchExpressions: 
-              - 
-                key: role
+          - matchExpressions: 
+              - key: role
                 operator: In
                 values: 
                   - aspenmesh
@@ -54,10 +49,8 @@ cert-manager:
       nodeAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
           nodeSelectorTerms: 
-            - 
-              matchExpressions: 
-                - 
-                  key: role
+            - matchExpressions: 
+                - key: role
                   operator: In
                   values: 
                     - aspenmesh
@@ -66,10 +59,8 @@ cert-manager:
       nodeAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
           nodeSelectorTerms: 
-            - 
-              matchExpressions: 
-                - 
-                  key: role
+            - matchExpressions: 
+                - key: role
                   operator: In
                   values: 
                     - aspenmesh
@@ -100,20 +91,16 @@ jaeger:
       nodeAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
           nodeSelectorTerms: 
-            - 
-              matchExpressions: 
-                - 
-                  key: role
+            - matchExpressions: 
+                - key: role
                   operator: In
                   values: 
                     - aspenmesh
       podAntiAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
-          - 
-            labelSelector: 
+          - labelSelector: 
               matchExpressions: 
-                - 
-                  key: app
+                - key: app
                   operator: In
                   values: 
                     - cassandra
@@ -125,10 +112,8 @@ jaeger:
       nodeAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
           nodeSelectorTerms: 
-            - 
-              matchExpressions: 
-                - 
-                  key: role
+            - matchExpressions: 
+                - key: role
                   operator: In
                   values: 
                     - aspenmesh
@@ -138,10 +123,8 @@ jaeger:
       nodeAffinity: 
         requiredDuringSchedulingIgnoredDuringExecution: 
           nodeSelectorTerms: 
-            - 
-              matchExpressions: 
-                - 
-                  key: role
+            - matchExpressions: 
+                - key: role
                   operator: In
                   values: 
                     - aspenmesh

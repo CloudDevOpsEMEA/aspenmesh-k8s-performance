@@ -127,5 +127,6 @@ jaeger:
                   operator: In
                   values: 
                     - aspenmesh
+pilot: 
 prometheus: 
   enabled: true

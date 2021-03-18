@@ -30,7 +30,7 @@ install: istioctl  ## Install aspenmesh
 		--from-file=${CERT_DIR}/cert-chain.pem 
 	helm install istio-base ${CHART_DIR}/base --namespace ${ASPEN_NAMESPACE} ${HELM_ARGS} || true
 	echo "sleeping 10 sec" && sleep 10
-	helm install istiod ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	helm install istio-discovery ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	echo "sleeping 120 sec" && sleep 120
 	helm install istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm install istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
@@ -40,7 +40,7 @@ install: istioctl  ## Install aspenmesh
 upgrade:  ## Upgrade aspenmesh
 	helm upgrade istio-base ${CHART_DIR}/base --namespace ${ASPEN_NAMESPACE} ${HELM_ARGS} || true
 	echo "sleeping 10 sec" && sleep 10
-	helm upgrade istiod ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	helm upgrade istio-discovery ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	echo "sleeping 20 sec" && sleep 20
 	helm upgrade istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm upgrade istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
@@ -52,7 +52,7 @@ uninstall:  ## Uninstall aspenmesh
 	helm uninstall istio-telemetry --namespace ${ASPEN_NAMESPACE} || true
 	helm uninstall istio-egress --namespace ${ASPEN_NAMESPACE} || true
 	helm uninstall istio-ingress --namespace ${ASPEN_NAMESPACE} || true
-	helm uninstall istiod --namespace ${ASPEN_NAMESPACE} || true
+	helm uninstall istio-discovery --namespace ${ASPEN_NAMESPACE} || true
 	helm uninstall istio-base --namespace ${ASPEN_NAMESPACE} || true
 	kubectl delete ns ${ASPEN_NAMESPACE} || true
 

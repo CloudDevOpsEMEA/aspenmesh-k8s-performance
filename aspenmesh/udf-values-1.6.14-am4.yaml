@@ -15,7 +15,7 @@ aspen-mesh-controlplane:
       #claims: aud=aspenmesh:io,role=k8s:admin
 
 aspen-mesh-packet-inspector:
-   enabled: true
+   enabled: false
    analysis:
      address: aspen-mesh-analysis-emulator.analysis-emulator:21000
 

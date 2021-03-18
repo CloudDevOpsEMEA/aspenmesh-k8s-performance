@@ -12,8 +12,7 @@ aspen-mesh-event-storage:
       requiredDuringSchedulingIgnoredDuringExecution: 
         nodeSelectorTerms: 
           - matchExpressions: 
-              - 
-                key: role
+              - key: role
                 operator: In
                 values: 
                   - aspenmesh

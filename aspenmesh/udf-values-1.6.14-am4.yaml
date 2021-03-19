@@ -28,6 +28,14 @@ aspen-mesh-event-storage:
 aspen-mesh-metrics-collector:
   meshConfig:
     enablePrometheusKubernetesMetrics: true
+  server:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 512Mi
 aspen-mesh-packet-inspector: 
   analysis: 
     address: "aspen-mesh-analysis-emulator.analysis-emulator:21000"

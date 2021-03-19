@@ -61,11 +61,11 @@ istioctl:  ## Install istioctl
 	sudo cp ~/.istioctl/bin/istioctl /usr/local/bin
 
 kiali-install:  ## Post installation steps
-	helm install --namespace istio-system --set auth.strategy="anonymous" --repo https://kiali.org/helm-charts kiali-server kiali-server
+	helm install --namespace istio-system --set auth.strategy="anonymous" --set deployment.node_selector="role: aspenmesh" --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
 kiali-upgrade:  ## Post upgrade steps
-	helm upgrade --namespace istio-system --set auth.strategy="anonymous" --repo https://kiali.org/helm-charts kiali-server kiali-server
+	helm upgrade --namespace istio-system --set auth.strategy="anonymous" --set deployment.node_selector="role: aspenmesh" --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
 kiali-uninstall:  ## Post uninstallation steps

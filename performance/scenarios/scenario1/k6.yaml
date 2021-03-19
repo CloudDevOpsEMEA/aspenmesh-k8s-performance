@@ -20,7 +20,7 @@ data:
     #!/usr/bin/env sh
 
     echo "Running run.sh with the following ENV"
-    env
+    env | sort -f
 
     echo "Waiting for ${TARGET_URL} to be reachable"
     until wget -T 1 -q --spider ${TARGET_URL} > /dev/null 2>&1

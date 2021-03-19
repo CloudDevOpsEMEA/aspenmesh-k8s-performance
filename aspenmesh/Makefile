@@ -60,18 +60,18 @@ istioctl:  ## Install istioctl
 	curl -sL https://istio.io/downloadIstioctl | ISTIO_VERSION=${ISTIO_VERSION} sh - && \
 	sudo cp ~/.istioctl/bin/istioctl /usr/local/bin
 
-post-install:  ## Post installation steps
+kiali-install:  ## Post installation steps
 	helm install --namespace istio-system --set auth.strategy="anonymous" --repo https://kiali.org/helm-charts kiali-server kiali-server
-	kubectl apply -f ./post-install/
+	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
-post-upgrade:  ## Post upgrade steps
+kiali-upgrade:  ## Post upgrade steps
 	helm upgrade --namespace istio-system --set auth.strategy="anonymous" --repo https://kiali.org/helm-charts kiali-server kiali-server
-	kubectl apply -f ./post-install/
+	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
-post-uninstall:  ## Post uninstallation steps
+kiali-uninstall:  ## Post uninstallation steps
 	helm uninstall --namespace istio-system kiali-server
 	kubectl delete crd monitoringdashboards.monitoring.kiali.io
-	kubectl delete -f ./post-install/
+	kubectl delete -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
 install-analysis-emulator:  ## Install aspen mesh packet capture analysis emulator
 	kubectl create ns ${ANALYSIS_EMULATOR_NAMESPACE}

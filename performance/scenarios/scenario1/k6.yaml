@@ -31,7 +31,7 @@ data:
     echo -e "\n${TARGET_URL} is now reachable"
 
     echo "Starting k6 load test"
-    k6 run /home/k6/test.js
+    k6 run --quiet /home/k6/test.js
 
     echo "Finished k6 load test"
     sleep infinity

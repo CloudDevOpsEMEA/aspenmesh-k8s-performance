@@ -63,8 +63,8 @@ spec:
           volumeMounts:
             - name: k6-config
               mountPath: /home/k6
-          args:
-          - "/home/k6/run.sh"
+          command: ["/bin/sh"]
+          args: ["-c", "/home/k6/run.sh"]
           resources:
             requests:
               cpu: 500m

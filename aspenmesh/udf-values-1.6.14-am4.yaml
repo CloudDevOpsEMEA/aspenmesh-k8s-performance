@@ -25,6 +25,9 @@ aspen-mesh-event-storage:
                 values: 
                   - aspen-mesh-event-storage
           topologyKey: kubernetes.io/hostname
+aspen-mesh-metrics-collector:
+  meshConfig:
+    enablePrometheusKubernetesMetrics: true
 aspen-mesh-packet-inspector: 
   analysis: 
     address: "aspen-mesh-analysis-emulator.analysis-emulator:21000"
@@ -80,8 +83,6 @@ jaeger:
   storage:
     cassandra:
       nameOverride: aspen-mesh-cassandra
-meshConfig:
-  enablePrometheusKubernetesMetrics: true
 pilot:
   nodeSelector:
     role: aspenmesh

@@ -147,6 +147,7 @@ data:
         regex: istio-sidecar-injector;http-monitoring
 {{- end }}
 
+
 {{- if .Values.meshConfig.enablePrometheusKubernetesMetrics }}
     # scrape config for API servers
     - job_name: 'kubernetes-apiservers'
@@ -276,6 +277,7 @@ data:
         action: replace
         target_label: pod_name
 {{- end }}
+
 
 {{- if and .Values.server.provisionPrometheusCert (not .Values.meshConfig.enablePrometheusMerge) }}
     - job_name: 'kubernetes-pods-istio-secure'

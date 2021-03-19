@@ -47,7 +47,7 @@ spec:
       containers:
         - name: k6
           image: loadimpact/k6:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: k6-test
               mountPath: /home/k6

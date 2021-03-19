@@ -19,7 +19,7 @@ data:
   run.sh: |
     #!/usr/bin/env sh
 
-    echo "Waiting for target service to be reachable"
+    echo "Waiting for ${TARGET_SERVER} to be reachable"
     until wget -T 1 -q --spider ${TARGET_SERVER} > /dev/null 2>&1
     do
         echo -n .

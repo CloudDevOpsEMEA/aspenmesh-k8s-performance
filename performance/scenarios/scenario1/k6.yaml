@@ -13,25 +13,25 @@ data:
       ],
     };
     export default function() {
-      let response = http.get(${__ENV.TARGET_SERVER});
+      let response = http.get(`${__ENV.TARGET_URL}`);
     };
 
   run.sh: |
     #!/usr/bin/env sh
 
-    echo "Waiting for ${TARGET_SERVER} to be reachable"
-    until wget -T 1 -q --spider ${TARGET_SERVER} > /dev/null 2>&1
+    echo "Waiting for ${TARGET_URL} to be reachable"
+    until wget -T 1 -q --spider ${TARGET_URL} > /dev/null 2>&1
     do
         echo -n .
         sleep 1
     done
-    echo "\n${TARGET_SERVER} is now reachable"
+    echo -e "\n${TARGET_URL} is now reachable"
     
     echo "Running run.sh with the following ENV"
     echo $(env)
 
     echo "Starting k6 load test"
-    k6 run -e TARGET_SERVER=${TARGET_SERVER} /home/k6/test.js
+    k6 run /home/k6/test.js
 
     echo "Finished k6 load test"
     sleep infinity
@@ -69,7 +69,7 @@ spec:
           image: loadimpact/k6:latest
           imagePullPolicy: IfNotPresent
           env:
-            - name: TARGET_SERVER
+            - name: TARGET_URL
               value: "http://service1:9091/"
           volumeMounts:
             - name: k6-config

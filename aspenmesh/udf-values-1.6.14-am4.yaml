@@ -29,7 +29,7 @@ aspen-mesh-metrics-collector:
   meshConfig:
     enablePrometheusKubernetesMetrics: true
   server:
-    resources:
+    serviceResources:
       limits:
         cpu: 500m
         memory: 2Gi

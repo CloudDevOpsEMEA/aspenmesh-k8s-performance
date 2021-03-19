@@ -13,12 +13,11 @@ data:
       ],
     };
     export default function() {
-      let response = http.get(process.env.TARGET_SERVER);
+      let response = http.get(${__ENV.TARGET_SERVER});
     };
 
   run.sh: |
     #!/usr/bin/env sh
-    set -x
 
     echo "Waiting for target service to be reachable"
     until wget -T 1 -q --spider ${TARGET_SERVER}

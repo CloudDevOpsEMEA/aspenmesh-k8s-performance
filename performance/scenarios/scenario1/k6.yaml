@@ -34,7 +34,7 @@ data:
     k6 run /home/k6/test.js
 
     echo "Finished k6 load test"
-    sleep
+    sleep infinity
 
 ---
 apiVersion: v1

@@ -13,11 +13,19 @@ data:
       ],
     };
     export default function() {
-      let response = http.get("http://service1:9091/");
+      let response = http.get(process.env.TARGET_SERVER);
     };
+
   run.sh: |
     #!/usr/bin/env sh
 
+    echo "Waiting for target service to be reachable"
+    until wget -T 1 -q --spider ${TARGET_SERVER}
+    do
+        echo -n .
+        sleep 1
+    done
+    
     set -x
     echo "Running run.sh with the following ENV"
     echo $(env)
@@ -60,6 +68,9 @@ spec:
         - name: k6
           image: loadimpact/k6:latest
           imagePullPolicy: IfNotPresent
+          env:
+          - name: TARGET_SERVER
+            value: "http://service1:9091/"
           volumeMounts:
             - name: k6-config
               mountPath: /home/k6
@@ -69,6 +80,7 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
+
       volumes:
         - name: k6-config
           configMap:

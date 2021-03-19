@@ -69,8 +69,8 @@ spec:
           image: loadimpact/k6:latest
           imagePullPolicy: IfNotPresent
           env:
-          - name: TARGET_SERVER
-            value: "http://service1:9091/"
+            - name: TARGET_SERVER
+              value: "http://service1:9091/"
           volumeMounts:
             - name: k6-config
               mountPath: /home/k6

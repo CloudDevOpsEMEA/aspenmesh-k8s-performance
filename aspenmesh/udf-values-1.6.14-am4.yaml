@@ -80,6 +80,8 @@ jaeger:
   storage:
     cassandra:
       nameOverride: aspen-mesh-cassandra
+meshConfig:
+  enablePrometheusKubernetesMetrics: true
 pilot:
   nodeSelector:
     role: aspenmesh

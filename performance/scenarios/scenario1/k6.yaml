@@ -18,6 +18,7 @@ data:
 
   run.sh: |
     #!/usr/bin/env sh
+    set -x
 
     echo "Waiting for target service to be reachable"
     until wget -T 1 -q --spider ${TARGET_SERVER}
@@ -26,7 +27,6 @@ data:
         sleep 1
     done
     
-    set -x
     echo "Running run.sh with the following ENV"
     echo $(env)
 

@@ -11,6 +11,9 @@ ISTIO_VERSION=1.6.14
 ANALYSIS_EMULATOR_NAMESPACE=analysis-emulator
 ANALYSIS_EMULATOR_CHART_DIR=./aspenmesh-carrier-grade-${ASPEN_VERSION}/samples/aspenmesh/analysis-emulator
 
+KIALI_VALUES=./post-install/kiali/udf-values-kiali.yaml
+
+
 HELM_ARGS=
 # HELM_ARGS=--debug
 
@@ -61,11 +64,11 @@ istioctl:  ## Install istioctl
 	sudo cp ~/.istioctl/bin/istioctl /usr/local/bin
 
 kiali-install:  ## Post installation steps
-	helm install --namespace istio-system --set auth.strategy="anonymous" --set deployment.node_selector="role: aspenmesh" --repo https://kiali.org/helm-charts kiali-server kiali-server
+	helm install --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
 kiali-upgrade:  ## Post upgrade steps
-	helm upgrade --namespace istio-system --set auth.strategy="anonymous" --set deployment.node_selector="role: aspenmesh" --repo https://kiali.org/helm-charts kiali-server kiali-server
+	helm upgrade --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
 kiali-uninstall:  ## Post uninstallation steps

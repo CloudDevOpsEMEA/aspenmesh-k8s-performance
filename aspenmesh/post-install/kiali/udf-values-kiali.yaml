@@ -1,0 +1,5 @@
+auth:
+  strategy: anonymous
+deployment:
+  node_selector: 
+    role: aspenmesh

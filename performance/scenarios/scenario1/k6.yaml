@@ -20,17 +20,18 @@ data:
     #!/usr/bin/env sh
 
     echo "Waiting for target service to be reachable"
-    until wget -T 1 -q --spider ${TARGET_SERVER}
+    until wget -T 1 -q --spider ${TARGET_SERVER} > /dev/null 2>&1
     do
         echo -n .
         sleep 1
     done
+    echo "\n${TARGET_SERVER} is now reachable"
     
     echo "Running run.sh with the following ENV"
     echo $(env)
 
     echo "Starting k6 load test"
-    k6 run /home/k6/test.js
+    k6 run -e TARGET_SERVER=${TARGET_SERVER} /home/k6/test.js
 
     echo "Finished k6 load test"
     sleep infinity

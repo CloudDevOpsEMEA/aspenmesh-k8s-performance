@@ -11,6 +11,11 @@ deployment:
     requests:
       cpu: 200m
       memory: 256Mi
+  affinity:
+    node: {}
+    pod: {}
+    pod_anti: {}
+  tolerations: []
   nodeSelector:
     role: application
 

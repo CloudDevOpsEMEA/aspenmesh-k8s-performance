@@ -63,18 +63,28 @@ istioctl:  ## Install istioctl
 	curl -sL https://istio.io/downloadIstioctl | ISTIO_VERSION=${ISTIO_VERSION} sh - && \
 	sudo cp ~/.istioctl/bin/istioctl /usr/local/bin
 
-kiali-install:  ## Post installation steps
+kiali-install:  ## Install kiali
 	helm install --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
-kiali-upgrade:  ## Post upgrade steps
+kiali-upgrade:  ## Upgrade kiali
 	helm upgrade --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
 	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
 
-kiali-uninstall:  ## Post uninstallation steps
+kiali-uninstall:  ## Uninstall kiali
 	helm uninstall --namespace istio-system kiali-server
 	kubectl delete crd monitoringdashboards.monitoring.kiali.io
 	kubectl delete -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
+
+node-exporter-install:  ## Install node-exporter
+	helm repo add bitnami https://charts.bitnami.com/bitnami || true
+	helm install --namespace kube-system node-exporter bitnami/node-exporter
+
+node-exporter-upgrade:  ## Upgrade node-exporter
+	helm upgrade --namespace kube-system node-exporter bitnami/node-exporter
+
+node-exporter-uninstall:  ## Uninstall node-exporter
+	helm uninstall --namespace kube-system node-exporter
 
 install-analysis-emulator:  ## Install aspen mesh packet capture analysis emulator
 	kubectl create ns ${ANALYSIS_EMULATOR_NAMESPACE}

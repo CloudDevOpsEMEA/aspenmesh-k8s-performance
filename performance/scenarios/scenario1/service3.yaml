@@ -23,6 +23,7 @@ hpa:
 
 goserver:
   b3Trace: true
+  json: false
   requestSize: 50
   responseSize: 50
   # serverName: (default to hostname = pod name in k8s)

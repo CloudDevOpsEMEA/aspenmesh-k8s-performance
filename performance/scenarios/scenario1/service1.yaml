@@ -3,7 +3,7 @@ deployment:
   livenessProbe:
     initialDelaySeconds: 30
     periodSeconds: 30
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   readinessProbe:
     initialDelaySeconds: 10
     periodSeconds: 10

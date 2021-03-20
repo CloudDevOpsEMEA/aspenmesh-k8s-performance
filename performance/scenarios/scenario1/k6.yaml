@@ -17,7 +17,7 @@ data:
       let res = '';
       while (length--) res += charset[Math.random() * charset.length | 0];
       return res;
-    }
+    };
     export default function() {
       let response = http.get(`${__ENV.TARGET_URL}`, `${randomString(${__ENV.REQUEST_SIZE})}`);
     };

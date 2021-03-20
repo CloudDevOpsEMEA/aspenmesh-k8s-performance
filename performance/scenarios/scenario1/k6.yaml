@@ -90,7 +90,6 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
-
       volumes:
         - name: k6-config
           configMap:

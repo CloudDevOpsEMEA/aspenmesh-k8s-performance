@@ -22,14 +22,14 @@ hpa:
   targetCPUUtilizationPercentage: 80
   
 goserver:
-  b3Trace: true
+  b3Trace: false
   json: false
   requestSize: 50
   responseSize: 50
   # serverName: (default to hostname = pod name in k8s)
   serverPort: 9091
-  upstreamHost: service2
-  upstreamPort: 9092
+  upstreamHost: ""
+  upstreamPort: 0
   verbose: true
 
 service:

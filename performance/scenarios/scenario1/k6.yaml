@@ -19,7 +19,7 @@ data:
       return res;
     };
     export default function() {
-      let response = http.request('GET', `${__ENV.TARGET_URL}`, `${randomString(${__ENV.REQUEST_SIZE})}`);
+      let response = http.request('GET', `${__ENV.TARGET_URL}`, `${randomString(`${__ENV.REQUEST_SIZE}`)}`);
     };
 
   run.sh: |

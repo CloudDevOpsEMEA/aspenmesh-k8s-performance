@@ -12,8 +12,14 @@ data:
         { duration: "5m", target: 5 },
       ],
     };
+    function randomString(length) {
+      const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let res = '';
+      while (length--) res += charset[Math.random() * charset.length | 0];
+      return res;
+    }
     export default function() {
-      let response = http.get(`${__ENV.TARGET_URL}`);
+      let response = http.get(`${__ENV.TARGET_URL}`, `${randomString(${__ENV.REQUEST_SIZE})}`);
     };
 
   run.sh: |
@@ -71,6 +77,8 @@ spec:
           env:
             - name: TARGET_URL
               value: "http://service1:9091/"
+            - name: REQUEST_SIZE
+              value: "50"
           volumeMounts:
             - name: k6-config
               mountPath: /home/k6

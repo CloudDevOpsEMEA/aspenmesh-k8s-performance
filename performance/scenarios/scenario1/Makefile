@@ -29,15 +29,19 @@ uninstall:  ## Uninstall microservices
 	helm uninstall service1 --namespace ${NAMESPACE} || true
 	kubectl delete namespace ${NAMESPACE} || true
 
-restart: ## Restart all microservices
+reinstall: uninstall install  ## Reinstall microservices
+
+restart:  ## Restart all microservices
 	kubectl -n ${NAMESPACE} rollout restart deploy
 
-view: ## View all microservices
+view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
 
-k6_install:
+k6_install:  ## Install and run k6 performance tool
 	kubectl  -n ${NAMESPACE} apply -f ./k6.yaml
 
-k6_uninstall:
+k6_uninstall:  ## Uninstall and run k6 performance tool
 	kubectl  -n ${NAMESPACE} delete -f ./k6.yaml
+
+k6_reinstall: k6_uninstall k6_install  ## Reinstall and run k6 performance tool

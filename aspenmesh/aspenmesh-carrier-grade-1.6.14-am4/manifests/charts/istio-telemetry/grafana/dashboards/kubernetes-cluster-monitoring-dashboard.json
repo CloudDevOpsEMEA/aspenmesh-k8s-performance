@@ -36,7 +36,7 @@
     }
   ],
   "id": null,
-  "title": "Kubernetes cluster monitoring (via Prometheus)",
+  "title": "Kubernetes Cluster Dashboard",
   "description": "Monitors Kubernetes cluster using Prometheus. Shows overall cluster CPU / Memory / Filesystem usage as well as individual pod, containers, systemd services statistics. Uses cAdvisor metrics only.",
   "tags": [
     "kubernetes"

@@ -688,7 +688,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Kubernetes pod and cluster monitoring (via Prometheus)",
+  "title": "Kubernetes Pod and Cluster Dashboard",
   "uid": "AAOMjeHmk",
   "version": 5
 }

@@ -3,7 +3,6 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/component: query
-    app.kubernetes.io/instance: istiod
     app.kubernetes.io/name: jaeger
     app.kubernetes.io/version: 1.16.0
   name: aspen-mesh-jaeger-query-np

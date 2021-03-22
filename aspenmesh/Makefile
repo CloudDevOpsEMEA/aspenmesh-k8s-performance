@@ -67,16 +67,16 @@ istioctl:  ## Install istioctl
 
 kiali-install:  ## Install kiali
 	helm install --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
-	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
+	kubectl apply -f ./post-install/kiali/04-kiali-nodeport-svc.yaml
 
 kiali-upgrade:  ## Upgrade kiali
 	helm upgrade --namespace istio-system --values ${KIALI_VALUES} --repo https://kiali.org/helm-charts kiali-server kiali-server
-	kubectl apply -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
+	kubectl apply -f ./post-install/kiali/04-kiali-nodeport-svc.yaml
 
 kiali-uninstall:  ## Uninstall kiali
 	helm uninstall --namespace istio-system kiali-server
 	kubectl delete crd monitoringdashboards.monitoring.kiali.io
-	kubectl delete -f ./post-install/kiali/03-kiali-nodeport-svc.yaml
+	kubectl delete -f ./post-install/kiali/04-kiali-nodeport-svc.yaml
 
 node-exporter-install:  ## Install node-exporter
 	helm repo add bitnami https://charts.bitnami.com/bitnami || true

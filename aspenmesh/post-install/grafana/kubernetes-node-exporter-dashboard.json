@@ -21050,7 +21050,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Node Exporter Dashboard",
+  "title": "Kubernetes Node Exporter Dashboard",
   "uid": "mc2EfOwGz",
   "version": 3
 }

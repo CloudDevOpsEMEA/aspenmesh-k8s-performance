@@ -31,8 +31,8 @@ aspen-mesh-metrics-collector:
   server:
     serviceResources:
       limits:
-        cpu: 500m
-        memory: 2Gi
+        cpu: 1000m
+        memory: 4Gi
       requests:
         cpu: 500m
         memory: 512Mi

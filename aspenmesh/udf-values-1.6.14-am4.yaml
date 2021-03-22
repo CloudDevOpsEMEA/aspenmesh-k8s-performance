@@ -2,9 +2,6 @@
 aspen-mesh-controlplane: 
   clusterId: PerfTest
   userAuth: 
-    jwt: 
-      jwks: "https://YOUR_DOMAIN/.well-known/jwks.json"
-      redirectUrl: "https://YOUR_DOMAIN/login"
     type: none
 aspen-mesh-event-storage: 
   affinity: 

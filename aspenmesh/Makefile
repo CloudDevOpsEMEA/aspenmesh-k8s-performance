@@ -108,7 +108,9 @@ bookinfo-install:  ## Install the bookinfo demo application
 	kubectl create ns bookinfo
 	kubectl label namespace bookinfo istio-injection=enabled
 	kubectl apply -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/platform/kube/bookinfo.yaml
+	kubectl apply -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/networking/bookinfo-gateway.yaml
 
 bookinfo-uninstall:  ## Uninstall the bookinfo demo application
+	kubectl delete -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/networking/bookinfo-gateway.yaml
 	kubectl delete -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/platform/kube/bookinfo.yaml
 	kubectl delete ns bookinfo

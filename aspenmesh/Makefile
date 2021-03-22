@@ -3,13 +3,14 @@
 ASPEN_NAMESPACE=istio-system
 ASPEN_VERSION=1.6.14-am4
 ASPEN_VALUES=./udf-values-${ASPEN_VERSION}.yaml
-CHART_DIR=./aspenmesh-carrier-grade-${ASPEN_VERSION}/manifests/charts
+ASPEN_DIR=./aspenmesh-carrier-grade-${ASPEN_VERSION}
+CHART_DIR=${ASPEN_DIR}/manifests/charts
 CERT_DIR=../certificates/cluster
 
 ISTIO_VERSION=1.6.14
 
 ANALYSIS_EMULATOR_NAMESPACE=analysis-emulator
-ANALYSIS_EMULATOR_CHART_DIR=./aspenmesh-carrier-grade-${ASPEN_VERSION}/samples/aspenmesh/analysis-emulator
+ANALYSIS_EMULATOR_CHART_DIR=${ASPEN_DIR}/samples/aspenmesh/analysis-emulator
 
 KIALI_VALUES=./post-install/kiali/udf-values-kiali.yaml
 
@@ -102,3 +103,12 @@ analysis-emulator-uninstall:  ## Uninstall aspen mesh packet capture analysis em
 	helm uninstall analysis-emulator --namespace ${ANALYSIS_EMULATOR_NAMESPACE} || true
 	kubectl delete ns analysis-emulator
 	kubectl label --overwrite ns ${ASPEN_NAMESPACE} ca.istio.io/override=false
+
+bookinfo-install:  ## Install the bookinfo demo application
+	kubectl create ns bookinfo
+	kubectl label namespace bookinfo istio-injection=enabled
+	kubectl apply -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/platform/kube/bookinfo.yaml
+
+bookinfo-uninstall:  ## Uninstall the bookinfo demo application
+	kubectl delete -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/platform/kube/bookinfo.yaml
+	kubectl delete ns bookinfo

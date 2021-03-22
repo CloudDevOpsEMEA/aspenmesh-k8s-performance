@@ -59,6 +59,8 @@ uninstall:  ## Uninstall aspenmesh
 	helm uninstall istio-base --namespace ${ASPEN_NAMESPACE} || true
 	kubectl delete ns ${ASPEN_NAMESPACE} || true
 
+reinstall:  uninstall install ## Ininstall and install aspenmesh
+
 istioctl:  ## Install istioctl
 	curl -sL https://istio.io/downloadIstioctl | ISTIO_VERSION=${ISTIO_VERSION} sh - && \
 	sudo cp ~/.istioctl/bin/istioctl /usr/local/bin

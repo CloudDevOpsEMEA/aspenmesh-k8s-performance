@@ -20915,7 +20915,9 @@
   "refresh": false,
   "schemaVersion": 20,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "kubernetes"
+  ],
   "templating": {
     "list": [
       {

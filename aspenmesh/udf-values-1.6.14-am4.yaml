@@ -60,7 +60,6 @@ gateways:
     env: 
       ISTIO_META_REQUESTED_NETWORK_VIEW: external
   istio-ingressgateway: 
-    debug: debug
     enabled: true
     type: ClusterIP
 global: 

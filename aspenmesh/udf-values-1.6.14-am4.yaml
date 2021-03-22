@@ -94,5 +94,6 @@ jaeger:
 pilot:
   nodeSelector:
     role: aspenmesh
+  traceSampling: 100.0
 prometheus: 
   enabled: true

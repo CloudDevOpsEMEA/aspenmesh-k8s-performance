@@ -26,6 +26,8 @@ aspen-mesh-event-storage:
                   - aspen-mesh-event-storage
           topologyKey: kubernetes.io/hostname
 aspen-mesh-metrics-collector:
+  meshConfig:
+    enablePrometheusKubernetesMetrics: true
   server:
     serviceResources:
       limits:
@@ -69,7 +71,6 @@ global:
   defaultNodeSelector: 
     role: aspenmesh
   meshConfig:
-    enablePrometheusKubernetesMetrics: true
     defaultConfig:
       tracing:
         sampling: 10
@@ -107,8 +108,5 @@ jaeger:
 pilot:
   nodeSelector:
     role: aspenmesh
-  traceSampling: 100.0
 prometheus: 
-  enabled: true
-tracing:
   enabled: true

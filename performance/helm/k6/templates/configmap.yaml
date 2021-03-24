@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.service.name }}-config
+  labels:
+    app: {{ .Values.service.name }}
+    chart: 'k6-{{ .Chart.Version | replace "+" "_" }}'
+    version: {{ .Values.service.version }}
+data:
+  test.js: |
+    import http from 'k6/http';
+    export let options = {
+      duration: `${__ENV.K6_DURATION}`,
+      vus: `${__ENV.K6_VIRTUAL_USERS}`,
+    };
+    function randomString(length) {
+      const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let res = '';
+      while (length--) res += charset[Math.random() * charset.length | 0];
+      return res;
+    };
+    export default function() {
+      let response = http.request('GET', `${__ENV.K6_TARGET_URL}`, `${randomString(`${__ENV.K6_REQUEST_SIZE}`)}`);
+    };
+
+  run.sh: |
+    #!/usr/bin/env sh
+
+    echo "Running performance test the following K6 environment variables"
+    env | sort -f | grep "K6_"
+
+    echo "Waiting for ${K6_TARGET_URL} to be reachable"
+    until wget -T 1 -q --spider ${K6_TARGET_URL} > /dev/null 2>&1
+    do
+        echo -n .
+        sleep 1
+    done
+    echo -e "\n${K6_TARGET_URL} is now reachable"
+
+    echo "Starting k6 load test"
+    k6 run --quiet /home/k6/test.js
+
+    echo "Finished k6 load test"
+    sleep infinity

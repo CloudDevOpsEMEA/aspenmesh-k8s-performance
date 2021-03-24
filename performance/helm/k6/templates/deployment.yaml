@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.name }}
+    chart: 'k6-{{ .Chart.Version | replace "+" "_" }}'
+    version: {{ .Values.service.version }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+        version: {{ .Values.service.version }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+        sidecar.istio.io/statsInclusionPrefixes: cluster.outbound,cluster.inbound
+    spec:
+      serviceAccountName: {{ .Values.service.account }}
+      containers:
+        - name: k6
+          image: loadimpact/k6:latest
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          env:
+            - name: K6_DURATION
+              value: "{{ .Values.k6.duration }}"
+            - name: K6_REQUEST_SIZE
+              value: "{{ .Values.k6.requestSize }}"
+            - name: K6_TARGET_URL
+              value: "{{ .Values.k6.targerUrl }}"
+            - name: K6_VIRTUAL_USERS
+              value: "{{ .Values.k6.virtualUsers }}"
+          volumeMounts:
+            - name: k6-config
+              mountPath: /home/k6
+          command: ["/bin/sh"]
+          args: ["-c", "/home/k6/run.sh"]
+          {{- if .Values.deployment.affinity.node }}
+          resources:
+          {{- toYaml .Values.deployment.resources | nindent 12 }}
+          {{- end }}
+      {{- if or (.Values.deployment.affinity.node) (or (.Values.deployment.pod) (.Values.deployment.pod_anti)) }}
+      affinity:
+        {{- if .Values.deployment.affinity.node }}
+        nodeAffinity:
+        {{- toYaml .Values.deployment.affinity.node | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod }}
+        podAffinity:
+        {{- toYaml .Values.deployment.affinity.pod | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod_anti }}
+        podAntiAffinity:
+        {{- toYaml .Values.deployment.affinity.pod_anti | nindent 10 }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.deployment.tolerations }}
+      tolerations:
+      {{- toYaml .Values.deployment.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if .Values.deployment.node_selector }}
+      nodeSelector:
+      {{- toYaml .Values.deployment.node_selector | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: k6-config
+          configMap:
+            name: {{ .Values.service.name }}-config
+            defaultMode: 0777

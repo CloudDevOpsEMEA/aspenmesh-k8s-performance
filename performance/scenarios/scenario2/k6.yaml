@@ -56,11 +56,6 @@ metadata:
   labels:
     app: k6
     version: 1.0.0
-  annotations:
-    proxy.istio.io/config: |-
-      proxyStatsMatcher:
-        inclusionRegexps:
-        - "cluster.*"
 spec:
   replicas: 1
   selector:
@@ -71,6 +66,11 @@ spec:
       labels:
         app: k6
         version: 1.0.0
+      annotations:
+        proxy.istio.io/config: |-
+          proxyStatsMatcher:
+            inclusionRegexps:
+            - "cluster.*"
     spec:
       serviceAccountName: k6
       containers:

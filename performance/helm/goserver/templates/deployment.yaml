@@ -7,11 +7,6 @@ metadata:
     app: {{ .Values.service.name }}
     chart: 'goserver-{{ .Chart.Version | replace "+" "_" }}'
     version: {{ .Values.service.version }}
-  annotations:
-    proxy.istio.io/config: |-
-      proxyStatsMatcher:
-        inclusionRegexps:
-        - "cluster.*"
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
@@ -24,6 +19,10 @@ spec:
         version: {{ .Values.service.version }}
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
+        proxy.istio.io/config: |-
+          proxyStatsMatcher:
+            inclusionRegexps:
+            - "cluster.*"
     spec:
       serviceAccountName: {{ .Values.service.account }}
       containers:

@@ -67,7 +67,7 @@ spec:
         app: k6
         version: 1.0.0
       annotations:
-        sidecar.istio.io/statsInclusionPrefixes: reporter=,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grpc,wasm,component,cluster.outbound,,cluster.inbound
+        sidecar.istio.io/statsInclusionPrefixes: reporter=,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grpc,wasm,component,cluster.outbound,cluster.inbound
     spec:
       serviceAccountName: k6
       containers:

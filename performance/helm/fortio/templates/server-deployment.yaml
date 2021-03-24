@@ -27,3 +27,5 @@ spec:
           name: http-fortio
         - containerPort: 8079
           name: grpc-ping
+      nodeSelector:
+        kubernetes.io/hostname: worker3

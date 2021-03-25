@@ -8,7 +8,7 @@ QUERIES_PS=0
 CONNECTION_ARRAY=( 16 64 512 1024 4096 8192 )
 RESPONSE_SIZE_ARRAY=( 4 128 512 1024 )
 
-for res_s in "${REQUEST_SIZE_ARRAY[@]}" ;do
+for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   for con in "${CONNECTION_ARRAY[@]}" ; do
 
     echo "RES_SIZE : ${res_s} , CONN : ${con}"

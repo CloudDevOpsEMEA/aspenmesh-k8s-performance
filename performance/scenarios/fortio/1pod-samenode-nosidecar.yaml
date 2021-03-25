@@ -17,7 +17,9 @@ server:
   nodeSelector: 
     kubernetes.io/hostname: worker1
   replicas: 1
-  resources: {}
+  resources:
+    limits:
+      cpu: "1"
 
   hpa:
     enabled: false

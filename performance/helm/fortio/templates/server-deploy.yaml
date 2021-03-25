@@ -42,4 +42,9 @@ spec:
       nodeSelector:
       {{- toYaml .Values.server.nodeSelector | nindent 8 }}
       {{- end }}
+      {{- if .Values.server.affinity.pod_anti }}
+      affinity:
+        podAntiAffinity:
+        {{- toYaml .Values.server.affinity.pod_anti | nindent 10 }}
+      {{- end }}
 {{- end }}

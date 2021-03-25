@@ -38,7 +38,7 @@ spec:
         - containerPort: 8079
           name: grpc-ping
           {{- if .Values.server.resources }}
-          resources:
+        resources:
           {{- toYaml .Values.server.resources | nindent 12 }}
           {{- end }}
       {{- if .Values.server.nodeSelector }}

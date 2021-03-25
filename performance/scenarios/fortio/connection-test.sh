@@ -11,7 +11,7 @@ RESPONSE_SIZE_ARRAY=( 4 128 512 1024 )
 for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   echo "========== RESPONSE_SIZE : ${res_s} =========="
   for con in "${CONNECTION_ARRAY[@]}" ; do
-    LABELS="scenario-1pod-samenode-nosidecar connection-${con} responsesize-${resp}"
+    LABELS="onepod-samenode-nosidecar connection-${con} responsesize-${res_s}"
     FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${con} -qps=${QUERIES_PS} -t=${TEST_DURATION} -a -r=0.001 -labels=\"${LABELS}\" http://fortio-server:8080/echo\?size\=${res_s}"
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
     kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | grep "All done"

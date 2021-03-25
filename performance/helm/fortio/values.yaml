@@ -30,3 +30,5 @@ istio:
   envoyStatsInclusionPrefixes: cluster.outbound
   mtls: true
   sidecarInjection: true
+  sidecarCpuLimit: false
+  sidecarCpuLimitValue: "1"

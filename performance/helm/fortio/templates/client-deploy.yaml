@@ -22,6 +22,9 @@ spec:
         {{- if .Values.istio.envoyStats }}
         sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.envoyStatsInclusionPrefixes }}"
         {{- end }}
+        {{- if .Values.istio.sidecarCpuLimit }}
+        sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.sidecarCpuLimitValue }}"
+        {{- end }}
       labels:
         app: {{ .Values.client.name }}
     spec:

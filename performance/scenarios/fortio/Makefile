@@ -9,6 +9,8 @@ CHART_DIR := ../../helm/fortio
 SCENARIO  := scenario1
 NAMESPACE := fortio
 
+FORTIO_TEST := /usr/bin/fortio load -jitter=False -c 200 -qps 0 -t 120s -a -r 0.001 -httpbufferkb=128 http://fortio-server:8080/echo\?size\=1024
+
 install:  ## Install scenario
 	kubectl create namespace ${NAMESPACE} || true
 	helm install ${SCENARIO} ${CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
@@ -28,3 +30,6 @@ restart:  ## Restart all microservices
 view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
+
+run:
+	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- ${FORTIO_TEST}

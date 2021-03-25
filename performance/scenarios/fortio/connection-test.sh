@@ -12,14 +12,7 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   for con in "${CONNECTION_ARRAY[@]}" ; do
 
     echo "RES_SIZE : ${res_s} , CONN : ${con}"
-    FORTIO_CMD="/usr/bin/fortio load \
-      -jitter=true \
-      -c=${con} \
-      -qps=${QUERIES_PS} \
-      -t=${TEST_DURATION} \
-      -a \
-      -r=0.001 \
-      http://fortio-server:8080/echo\?size\=${res_s}"
+    FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${con} -qps=${QUERIES_PS} -t=${TEST_DURATION} -a -r=0.001 http://fortio-server:8080/echo\?size\=${res_s}"
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
     kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | grep "All done"
 

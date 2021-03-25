@@ -5,8 +5,8 @@ FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpat
 TEST_DURATION=2m
 QUERIES_PS=0
 
-CONNECTION_ARRAY=( 16 64 512 1024 4096 8192 )
-RESPONSE_SIZE_ARRAY=( 4 128 512 1024 )
+CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
+RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
 
 for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   echo "========== RESPONSE_SIZE : ${res_s} =========="

@@ -6,7 +6,7 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 CHART_DIR := ../../helm/fortio
-SCENARIO  := scenario3
+SCENARIO  := 1pod-diffnode-nosidecar
 NAMESPACE := fortio
 
 install:  ## Install scenario

@@ -31,5 +31,5 @@ view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
 
-run:
+run:  ## Run performance test
 	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- ${FORTIO_TEST}

@@ -20,6 +20,7 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
       -a \
       -r=0.001 \
       http://fortio-server:8080/echo\?size\=${res_s}"
+    echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
     kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | grep "All done"
 
   done

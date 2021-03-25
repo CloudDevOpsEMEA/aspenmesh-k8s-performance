@@ -9,9 +9,11 @@ CHART_DIR := ../../helm/fortio
 SCENARIO  := scenario1
 NAMESPACE := fortio
 
+CONNECTIONS := 64
+
 FORTIO_TEST := /usr/bin/fortio load \
 	-jitter=true \
-	-c=32 \
+	-c=${CONNECTIONS} \
 	-qps=0 \
 	-t=60s \
 	-payload-size=1024 \

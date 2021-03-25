@@ -11,7 +11,7 @@ NAMESPACE := fortio
 
 FORTIO_TEST := /usr/bin/fortio load \
 	-jitter=true \
-	-c=2000 \
+	-c=16 \
 	-qps=0 \
 	-t=120s \
 	-payload-size=1024 \

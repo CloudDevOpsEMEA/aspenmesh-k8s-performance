@@ -1,11 +1,12 @@
 ---
+{{- if .Values.server.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: fortio-server
-  namespace: fortio
+  name: {{ .Values.server.name }}
+  namespace: {{ .Values.server.namespace }}
   labels:
-    app: fortio-server
+    app: {{ .Values.server.name }}
 spec:
   ports:
   - port: 8080
@@ -15,4 +16,5 @@ spec:
     name: http2
     targetPort: grpc-ping
   selector:
-    app: fortio-server
+    app: {{ .Values.server.name }}
+{{- end }}

@@ -1,0 +1,18 @@
+---
+{{ if .Values.server.hpa.enabled }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.server.name }}
+  namespace: {{ .Values.server.namespace }}
+  labels:
+    app: {{ .Values.server.name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Values.server.name }}
+  minReplicas: {{ .Values.server.hpa.minReplicas }}
+  maxReplicas: {{ .Values.server.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.server.hpa.targetCPUUtilizationPercentage }}
+{{ end }}

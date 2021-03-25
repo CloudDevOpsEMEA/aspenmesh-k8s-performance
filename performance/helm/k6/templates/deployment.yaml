@@ -40,7 +40,7 @@ spec:
               mountPath: /home/k6
           command: ["/bin/sh"]
           args: ["-c", "/home/k6/run.sh"]
-          {{- if .Values.deployment.affinity.node }}
+          {{- if .Values.deployment.resources }}
           resources:
           {{- toYaml .Values.deployment.resources | nindent 12 }}
           {{- end }}

@@ -1,11 +1,12 @@
 ---
+{{- if .Values.client.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: fortio-client
-  namespace: fortio
+  name: {{ .Values.client.name }}
+  namespace: {{ .Values.client.namespace }}
   labels:
-    app: fortio-client
+    app: {{ .Values.client.name }}
 spec:
   ports:
   - port: 8080
@@ -16,5 +17,6 @@ spec:
     name: http2
     targetPort: grpc-ping
   selector:
-    app: fortio-client
+    app: {{ .Values.client.name }}
   type: NodePort
+{{- end }}

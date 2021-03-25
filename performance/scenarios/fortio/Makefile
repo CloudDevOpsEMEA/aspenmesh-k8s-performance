@@ -9,22 +9,6 @@ CHART_DIR := ../../helm/fortio
 SCENARIO  := scenario1
 NAMESPACE := fortio
 
-CONNECTIONS   := 64
-REQUEST_SIZE  := 1024
-RESPONSE_SIZE := 1024
-RUN_DURATION  := 60s
-QUERIES_PS    := 0
-
-FORTIO_TEST := /usr/bin/fortio load \
-	-jitter=true \
-	-c=${CONNECTIONS} \
-	-qps=${QUERIES_PS} \
-	-t=${RUN_DURATION} \
-	-payload-size=${REQUEST_SIZE} \
-	-a \
-	-r=0.001 \
-	 http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}
-
 install:  ## Install scenario
 	kubectl create namespace ${NAMESPACE} || true
 	helm install ${SCENARIO} ${CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
@@ -44,6 +28,3 @@ restart:  ## Restart all microservices
 view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
-
-run:  ## Run performance test
-	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- ${FORTIO_TEST}

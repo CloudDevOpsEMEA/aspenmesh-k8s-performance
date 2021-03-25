@@ -6,7 +6,7 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 CHART_DIR := ../../helm/fortio
-SCENARIO  := scenario1
+SCENARIO  := scenario2
 NAMESPACE := fortio
 
 install:  ## Install scenario

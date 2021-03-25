@@ -16,7 +16,7 @@ server:
   namespace: fortio
   nodeSelector: 
     kubernetes.io/hostname: worker1
-  replicas: 2
+  replicas: 3
   resources: {}
 
   hpa:

@@ -9,17 +9,21 @@ CHART_DIR := ../../helm/fortio
 SCENARIO  := scenario1
 NAMESPACE := fortio
 
-CONNECTIONS := 64
+CONNECTIONS   := 64
+REQUEST_SIZE  := 1024
+RESPONSE_SIZE := 1024
+RUN_DURATION  := 60s
+QUERIES_PS    := 0
 
 FORTIO_TEST := /usr/bin/fortio load \
 	-jitter=true \
 	-c=${CONNECTIONS} \
-	-qps=0 \
-	-t=60s \
-	-payload-size=1024 \
+	-qps=${QUERIES_PS} \
+	-t=${RUN_DURATION} \
+	-payload-size=${REQUEST_SIZE} \
 	-a \
 	-r=0.001 \
-	 http://fortio-server:8080/echo\?size\=1024
+	 http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}
 
 install:  ## Install scenario
 	kubectl create namespace ${NAMESPACE} || true

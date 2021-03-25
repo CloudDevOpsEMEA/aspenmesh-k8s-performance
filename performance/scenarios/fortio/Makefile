@@ -13,7 +13,7 @@ FORTIO_TEST := /usr/bin/fortio load \
 	-jitter=true \
 	-c=16 \
 	-qps=0 \
-	-t=120s \
+	-t=60s \
 	-payload-size=1024 \
 	-a \
 	-r=0.001 \

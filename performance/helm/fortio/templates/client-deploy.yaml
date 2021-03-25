@@ -37,10 +37,10 @@ spec:
           name: http-fortio
         - containerPort: 8079
           name: grpc-ping
-          {{- if .Values.client.resources }}
+        {{- if .Values.server.resources }}
         resources:
-          {{- toYaml .Values.client.resources | nindent 12 }}
-          {{- end }}
+        {{- toYaml .Values.server.resources | nindent 10 }}
+        {{- end }}
       {{- if .Values.client.nodeSelector }}
       nodeSelector:
       {{- toYaml .Values.client.nodeSelector | nindent 8 }}

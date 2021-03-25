@@ -15,12 +15,12 @@ spec:
   template:
     metadata:
       annotations:
-        sidecar.istio.io/inject: {{ .Values.istio.sidecarInjection }}
+        sidecar.istio.io/inject: "{{ .Values.istio.sidecarInjection }}"
         {{- if .Values.istio.sidecarInjection }}
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
         {{- end }}
         {{- if .Values.istio.envoyStats }}
-        sidecar.istio.io/statsInclusionPrefixes: {{ .Values.istio.envoyStatsInclusionPrefixes }}
+        sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.envoyStatsInclusionPrefixes }}"
         {{- end }}
       labels:
         app: {{ .Values.server.name }}

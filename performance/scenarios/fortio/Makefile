@@ -13,6 +13,9 @@ install:  ## Install scenario
 	kubectl create namespace ${NAMESPACE} || true
 	helm install ${SCENARIO} ${CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
 
+upgrade:  ## Upgrade scenario
+	helm upgrade ${SCENARIO} ${CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+
 uninstall:  ## Uninstall scenario
 	helm uninstall ${SCENARIO} --namespace ${NAMESPACE} || true
 	kubectl delete namespace ${NAMESPACE} || true

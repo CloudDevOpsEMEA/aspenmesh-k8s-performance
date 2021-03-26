@@ -2,7 +2,7 @@
 
 FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 
-TEST_DURATION=1m
+TEST_DURATION=5m
 QUERIES_PS=0
 
 CONNECTION_ARRAY=( 16 256 1024 4096 8192 )

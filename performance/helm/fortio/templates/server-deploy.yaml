@@ -23,7 +23,7 @@ spec:
         sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.envoyStatsInclusionPrefixes }}"
         {{- end }}
         {{- if .Values.istio.sidecarCpuLimit }}
-        sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.sidecarCpuLimitValue }}"
+        sidecar.istio.io/proxyCPULimit: "{{ .Values.istio.sidecarCpuLimitValue }}"
         {{- end }}
       labels:
         app: {{ .Values.server.name }}

@@ -36,8 +36,8 @@ install: istioctl  ## Install aspenmesh
 	echo "sleeping 10 sec" && sleep 10
 	helm install istio-discovery ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	echo "sleeping 120 sec" && sleep 120
-	helm install istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
-	helm install istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	# helm install istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	# helm install istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm install istio-telemetry ${CHART_DIR}/istio-telemetry/grafana --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	kubectl apply -f ./post-install/
 
@@ -46,16 +46,16 @@ upgrade:  ## Upgrade aspenmesh
 	echo "sleeping 10 sec" && sleep 10
 	helm upgrade istio-discovery ${CHART_DIR}/istio-control/istio-discovery --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	echo "sleeping 20 sec" && sleep 20
-	helm upgrade istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
-	helm upgrade istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	# helm upgrade istio-ingress ${CHART_DIR}/gateways/istio-ingress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
+	# helm upgrade istio-egress ${CHART_DIR}/gateways/istio-egress --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	helm upgrade istio-telemetry ${CHART_DIR}/istio-telemetry/grafana --namespace ${ASPEN_NAMESPACE} --values ${ASPEN_VALUES} ${HELM_ARGS} || true
 	kubectl apply -f ./post-install/
 
 uninstall:  ## Uninstall aspenmesh
 	kubectl delete -f ./post-install || true
 	helm uninstall istio-telemetry --namespace ${ASPEN_NAMESPACE} || true
-	helm uninstall istio-egress --namespace ${ASPEN_NAMESPACE} || true
-	helm uninstall istio-ingress --namespace ${ASPEN_NAMESPACE} || true
+	# helm uninstall istio-egress --namespace ${ASPEN_NAMESPACE} || true
+	# helm uninstall istio-ingress --namespace ${ASPEN_NAMESPACE} || true
 	helm uninstall istio-discovery --namespace ${ASPEN_NAMESPACE} || true
 	helm uninstall istio-base --namespace ${ASPEN_NAMESPACE} || true
 	kubectl delete ns ${ASPEN_NAMESPACE} || true

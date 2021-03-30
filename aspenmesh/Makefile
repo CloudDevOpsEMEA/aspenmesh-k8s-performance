@@ -81,6 +81,7 @@ kiali-uninstall:  ## Uninstall kiali
 
 node-exporter-install:  ## Install node-exporter
 	helm repo add bitnami https://charts.bitnami.com/bitnami || true
+	helm repo update
 	helm install --namespace kube-system node-exporter bitnami/node-exporter
 
 node-exporter-upgrade:  ## Upgrade node-exporter
@@ -90,10 +91,12 @@ node-exporter-uninstall:  ## Uninstall node-exporter
 	helm uninstall --namespace kube-system node-exporter
 
 kube-state-metrics-install:  ## Install kube-state-metrics
-	helm install --namespace kube-system kube-state-metrics stable/kube-state-metrics
+	helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics || true
+	helm repo update
+	helm install --namespace kube-system kube-state-metrics kube-state-metrics/kube-state-metrics
 
 kube-state-metrics-upgrade:  ## Upgrade kube-state-metrics
-	helm upgrade --namespace kube-system kube-state-metrics stable/kube-state-metrics
+	helm upgrade --namespace kube-system kube-state-metrics kube-state-metrics/kube-state-metrics
 
 kube-state-metrics-uninstall:  ## Uninstall kube-state-metrics
 	helm uninstall --namespace kube-system kube-state-metrics

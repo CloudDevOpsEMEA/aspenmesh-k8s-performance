@@ -9,7 +9,7 @@ CLIENT_CHART_DIR := ./helm/fortio-client
 SERVER_CHART_DIR := ./helm/fortio-server
 NAMESPACE := fortio
 
-SCENARIO  := 1pod-diffnode-sidecar-1core
+SCENARIO  := 1pod-diffnode-sidecar-1core-default
 
 
 install-client:  ## Install fortio client

@@ -9,27 +9,7 @@ CLIENT_CHART_DIR := ./helm/fortio-client
 SERVER_CHART_DIR := ./helm/fortio-server
 NAMESPACE := fortio
 
-# SCENARIO  := 1pod-samenode-nosidecar-maxcore
-
-# SCENARIO  := 1pod-diffnode-nosidecar-maxcore
-# SCENARIO  := 2pod-diffnode-nosidecar-maxcore
-# SCENARIO  := 3pod-diffnode-nosidecar-maxcore
-
-# SCENARIO  := 1pod-samenode-nosidecar-1core
-# SCENARIO  := 1pod-samenode-nosidecar-2core
-# SCENARIO  := 1pod-samenode-nosidecar-3core
-
-# SCENARIO  := 1pod-samenode-nosidecar-1core
-# SCENARIO  := 2pod-samenode-nosidecar-1core
-# SCENARIO  := 3pod-samenode-nosidecar-1core
-
-# SCENARIO  := 1pod-diffnode-nosidecar-1core
-# SCENARIO  := 1pod-diffnode-nosidecar-2core
-# SCENARIO  := 1pod-diffnode-nosidecar-3core
-
-# SCENARIO  := 1pod-diffnode-nosidecar-1core
-# SCENARIO  := 2pod-diffnode-nosidecar-1core
-# SCENARIO  := 3pod-diffnode-nosidecar-1core
+SCENARIO  := 1pod-diffnode-sidecar-1core
 
 
 install-client:  ## Install fortio client
@@ -82,4 +62,4 @@ exec-client:  ## Kubectl exec in client shell container
 	kubectl -n ${NAMESPACE} exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c shell -- bash
 
 run-test:
-	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- /usr/bin/fortio load -jitter=true -c=10 -qps=0 -t=24h -a -r=0.001 -labels=1pod-diffnode-sidecar-1core-default-conn10-resp1024 http://fortio-server:8080/echo\?size\=1024
+	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- /usr/bin/fortio load -jitter=true -c=10 -qps=0 -t=24h -a -r=0.001 -labels=${SCENARIO}-default-conn10-resp1024 http://fortio-server:8080/echo\?size\=1024

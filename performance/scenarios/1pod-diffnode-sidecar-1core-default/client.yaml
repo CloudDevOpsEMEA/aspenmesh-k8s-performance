@@ -9,6 +9,7 @@ deployment:
   resources:
     limits:
       cpu: "1"
+      memory: "256Mi"
   affinity:
     podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

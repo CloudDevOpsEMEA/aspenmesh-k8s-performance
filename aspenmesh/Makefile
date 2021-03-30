@@ -89,6 +89,15 @@ node-exporter-upgrade:  ## Upgrade node-exporter
 node-exporter-uninstall:  ## Uninstall node-exporter
 	helm uninstall --namespace kube-system node-exporter
 
+kube-state-metrics-install:  ## Install kube-state-metrics
+	helm install --namespace kube-system kube-state-metrics stable/kube-state-metrics
+
+kube-state-metrics-upgrade:  ## Upgrade kube-state-metrics
+	helm upgrade --namespace kube-system kube-state-metrics stable/kube-state-metrics
+
+kube-state-metrics-uninstall:  ## Uninstall kube-state-metrics
+	helm uninstall --namespace kube-system kube-state-metrics
+
 analysis-emulator-install:  ## Install aspen mesh packet capture analysis emulator
 	kubectl create ns ${ANALYSIS_EMULATOR_NAMESPACE}
 	kubectl label --overwrite ns ${ANALYSIS_EMULATOR_NAMESPACE} ca.istio.io/override=true

@@ -22,7 +22,7 @@ deployment:
         topologyKey: kubernetes.io/hostname
 
 istio:
-  envoyStatsInclusionPrefixes: ""
+  envoyStatsInclusionPrefixes: "cluster.inbound,cluster.outbound,listener"
   sidecarInjection: true
   sidecarCpuLimit: "1"
   sidecarConcurrency: ""

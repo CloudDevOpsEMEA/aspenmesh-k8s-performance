@@ -118,4 +118,4 @@ bookinfo-uninstall:  ## Uninstall the bookinfo demo application
 	kubectl delete ns bookinfo
 
 update-grafana:  ## Update to grafana 7.5.0
-	kubectl --namespace ${ASPEN_NAMESPACE} patch deployment grafana --type merge --patch `cat ./post-install/grafana/deployment-patch.yaml`
+	kubectl --namespace ${ASPEN_NAMESPACE} patch deployment grafana --type='json' -p '[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"grafana/grafana:7.5.0"}]'

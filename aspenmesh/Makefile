@@ -117,5 +117,5 @@ bookinfo-uninstall:  ## Uninstall the bookinfo demo application
 	kubectl delete -n bookinfo -f ${ASPEN_DIR}/samples/bookinfo/platform/kube/bookinfo.yaml || true
 	kubectl delete ns bookinfo
 
-update-grafana:
+update-grafana:  ## Update to grafana 7.5.0
 	kubectl patch deployment grafana --type merge --patch "$(cat ./post-install/grafana/deployment-patch.yaml)"

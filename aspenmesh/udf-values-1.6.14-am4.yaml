@@ -54,14 +54,14 @@ citadel:
   enabled: true
 external-dns: 
   enabled: false
-gateways: 
-  istio-egressgateway: 
-    enabled: false
-    env: 
-      ISTIO_META_REQUESTED_NETWORK_VIEW: external
-  istio-ingressgateway: 
-    enabled: true
-    type: ClusterIP
+# gateways: 
+#   istio-egressgateway: 
+#     enabled: false
+#     env: 
+#       ISTIO_META_REQUESTED_NETWORK_VIEW: external
+#   istio-ingressgateway: 
+#     enabled: true
+#     type: ClusterIP
 global: 
   certificateCustomFields: true
   defaultNodeSelector: 

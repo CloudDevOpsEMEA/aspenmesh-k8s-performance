@@ -66,9 +66,9 @@ FORTIO_SERVER_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO
 FORTIO_SERVER_SIDECAR_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"istio-proxy\"}[1m])"
 
 for RESPONSE_SIZE_INDEX in "${RESPONSE_SIZE_ARRAY[@]}" ; do
-  CONNECTIONS=10
+  CONNECTIONS=1
   while true ; do # Connections
-    QPS=100
+    QPS=50
     QPS_ITERATION=1
     while true ; do # QPS
 

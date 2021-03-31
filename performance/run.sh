@@ -65,10 +65,12 @@ FORTIO_CLIENT_SIDECAR_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"
 FORTIO_SERVER_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"fortio\"}[1m])"
 FORTIO_SERVER_SIDECAR_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"istio-proxy\"}[1m])"
 
-for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
-  for CONNECTIONS in "${CONNECTIONS_ARRAY[@]}" ; do
-    echo "Trying connections == ${CONNECTIONS}"
-    for QPS in "${QPS_ARRAY[@]}" ; do
+for RESPONSE_SIZE_INDEX in "${RESPONSE_SIZE_ARRAY[@]}" ; do
+  CONNECTIONS=10
+  while true ; do # Connections
+    QPS=100
+    QPS_ITERATION=1
+    while true ; do # QPS
 
       LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-qps${QPS}-resp${RESPONSE_SIZE}"
       FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${CONNECTIONS} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}"
@@ -91,24 +93,18 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       echo "{\"client_cpu\": \"${FORTIO_CLIENT_CPU_STAT}\", \"client_sidecar_cpu\": \"${FORTIO_CLIENT_SIDECAR_CPU_STAT}\", \"server_cpu\": ${FORTIO_SERVER_CPU_STAT}\", \"server_sidecar_cpu\": \"${FORTIO_SERVER_SIDECAR_CPU_STAT}\"" > ${LABELS}-cpustats.log
 
       sleep 30
-      if (( $(echo "$FORTIO_CLIENT_CPU_STAT > $MAX_CPU" | bc -l) )); then
-        echo "Max CPU threshold reached on FORTIO_CLIENT_CPU_STAT: ${FORTIO_CLIENT_CPU_STAT} !"
+      if (( $(echo "$FORTIO_CLIENT_CPU_STAT > $MAX_CPU" | bc -l) )) || (( $(echo "$FORTIO_CLIENT_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )) || (( $(echo "$FORTIO_SERVER_CPU_STAT > $MAX_CPU" | bc -l) )) || (( $(echo "$FORTIO_SERVER_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )); then
+        if [ "$QPS_ITERATION" == "1" ] ; then
+          break 2 
+        fi
         break
       fi
-      if (( $(echo "$FORTIO_CLIENT_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )); then
-        echo "Max CPU threshold reached on FORTIO_CLIENT_SIDECAR_CPU_STAT: ${FORTIO_CLIENT_SIDECAR_CPU_STAT} !"
-        break
-      fi
-      if (( $(echo "$FORTIO_SERVER_CPU_STAT > $MAX_CPU" | bc -l) )); then
-        echo "Max CPU threshold reached on FORTIO_SERVER_CPU_STAT: ${FORTIO_SERVER_CPU_STAT} !"
-        break
-      fi
-      if (( $(echo "$FORTIO_SERVER_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )); then
-        echo "Max CPU threshold reached on FORTIO_SERVER_SIDECAR_CPU_STAT: ${FORTIO_SERVER_SIDECAR_CPU_STAT} !"
-        break
-      fi
-    done
-  done
+
+      QPS=$(( ${QPS} * 2 ))
+      let "QPS_ITERATION++"
+    done # QPS
+    CONNECTIONS=$(( ${CONNECTIONS} * 2 ))
+  done # Connections
 done
 
 echo "Download  results for scenario ${LABEL_PREFIX}"

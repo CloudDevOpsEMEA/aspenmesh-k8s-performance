@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TIME=1m
+TIME=30s
 FORTIO_CLIENT_POD=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 FORTIO_SERVER_POD=$(kubectl get pods -n fortio -l app=fortio-server --output=jsonpath={.items..metadata.name})
 FORTIO_NAMESPACE=fortio
@@ -11,8 +11,7 @@ PROMETHEUS_URL=http://10.1.1.9:30001
 # CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
 # RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
 RESPONSE_SIZE_ARRAY=( 512 1024 )
-# CONNECTIONS_ARRAY=( 10 20 40 80 160 320 640 1028 )
-CONNECTIONS_ARRAY=( 40 80 160 320 640 1028 )
+CONNECTIONS_ARRAY=( 10 20 40 80 160 320 640 1028 )
 QPS_ARRAY=( 100 200 400 800 1600 3200 6400 )
 # RESPONSE_SIZE_ARRAY=( 32 128 )
 

@@ -92,8 +92,20 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       echo "CLIENT=${FORTIO_CLIENT_CPU_STAT}, CLIENT_SIDECAR=${FORTIO_CLIENT_SIDECAR_CPU_STAT}, SERVER=${FORTIO_SERVER_CPU_STAT}, SERVER_SIDECAR=${FORTIO_SERVER_SIDECAR_CPU_STAT}" > ${LABELS}-cpustats.log
 
       sleep 30
-      if [ ${FORTIO_CLIENT_CPU_STAT} > ${MAX_CPU} ] || [ ${FORTIO_CLIENT_SIDECAR_CPU_STAT} > ${MAX_CPU} ] || [ ${FORTIO_SERVER_CPU_STAT} > ${MAX_CPU} ] || [ ${FORTIO_SERVER_SIDECAR_CPU_STAT} > ${MAX_CPU} ] ; then
-        echo "Max CPU threshold reached !"
+      if (( $(echo "$FORTIO_CLIENT_CPU_STAT > $MAX_CPU" | bc -l) )); then
+        echo "Max CPU threshold reached on FORTIO_CLIENT_CPU_STAT: ${FORTIO_CLIENT_CPU_STAT} !"
+        break
+      fi
+      if (( $(echo "$FORTIO_CLIENT_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )); then
+        echo "Max CPU threshold reached on FORTIO_CLIENT_SIDECAR_CPU_STAT: ${FORTIO_CLIENT_SIDECAR_CPU_STAT} !"
+        break
+      fi
+      if (( $(echo "$FORTIO_SERVER_CPU_STAT > $MAX_CPU" | bc -l) )); then
+        echo "Max CPU threshold reached on FORTIO_SERVER_CPU_STAT: ${FORTIO_SERVER_CPU_STAT} !"
+        break
+      fi
+      if (( $(echo "$FORTIO_SERVER_SIDECAR_CPU_STAT > $MAX_CPU" | bc -l) )); then
+        echo "Max CPU threshold reached on FORTIO_SERVER_SIDECAR_CPU_STAT: ${FORTIO_SERVER_SIDECAR_CPU_STAT} !"
         break
       fi
     done

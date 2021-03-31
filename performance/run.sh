@@ -70,8 +70,8 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
 
       LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-qps${QPS}-resp${RESPONSE_SIZE}"
       FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${CONNECTIONS} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}"
-      echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
-      RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6)
+      echo "kubectl -n fortio exec -it ${FORTIO_CLIENT_POD} -c fortio -- ${FORTIO_CMD}"
+      RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT_POD} -c fortio -- ${FORTIO_CMD} | tail -n 6)
       QPS_RESULT=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
       echo "QPS_RESULTS = ${QPS_RESULT}"
 

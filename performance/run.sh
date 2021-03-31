@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TIME=30s
+TIME=1m
 FORTIO_CLIENT_POD=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 FORTIO_SERVER_POD=$(kubectl get pods -n fortio -l app=fortio-server --output=jsonpath={.items..metadata.name})
 FORTIO_NAMESPACE=fortio

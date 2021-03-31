@@ -11,6 +11,9 @@ NAMESPACE := fortio
 
 SCENARIO  := 1pod-diffnode-sidecar-1core-default
 
+CONCURRENT	:= 10
+QPS					:= 0
+
 
 install-client:  ## Install fortio client
 	helm install fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./scenarios/${SCENARIO}/client.yaml || true
@@ -62,4 +65,4 @@ exec-client:  ## Kubectl exec in client shell container
 	kubectl -n ${NAMESPACE} exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c shell -- bash
 
 run-test:  ## Run fortio performance test 
-	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- /usr/bin/fortio load -jitter=true -c=10 -qps=0 -t=24h -a -r=0.001 -labels=${SCENARIO}-default-conn10-resp1024 http://fortio-server:8080/echo\?size\=1024
+	kubectl -n fortio exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c fortio -- /usr/bin/fortio load -jitter=true -c=${CONCURRENT} -qps=${QPS} -t=24h -a -r=0.001 -labels=${SCENARIO}-default-conn10-resp1024 http://fortio-server:8080/echo\?size\=1024

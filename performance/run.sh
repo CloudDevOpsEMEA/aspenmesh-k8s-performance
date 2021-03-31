@@ -15,7 +15,7 @@ CONNECTIONS_ARRAY=( 10 20 40 80 160 320 640 1028 )
 QPS_ARRAY=( 100 200 400 800 1600 3200 6400 )
 # RESPONSE_SIZE_ARRAY=( 32 128 )
 
-MAX_CPU=0.9
+MAX_CPU="0.9"
 
 printhelp() {
    echo "This bash script starts fortio tests"
